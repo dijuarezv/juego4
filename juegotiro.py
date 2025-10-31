@@ -75,9 +75,12 @@ def move():
 
     draw()
 
+    # Si un objetivo sale de la pantalla, reaparece en el borde derecho con nueva altura
+
     for target in targets:
         if not inside(target):
-            return
+           target.x = 200
+           target.y = randrange(-150, 150)
 
     """Intervalo de actualización reducido para mayor velocidad/fluidez"""
     ontimer(move, 25)

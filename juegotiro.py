@@ -18,13 +18,16 @@ speed = vector(0, 0)
 targets = []
 
 
+
+
 def tap(x, y):
     """Respond to screen tap."""
     if not inside(ball):
         ball.x = -199
         ball.y = -199
-        speed.x = (x + 200) / 25
-        speed.y = (y + 200) / 25
+        """Velocidad inicial aumentada"""
+        speed.x = (x + 200) / 12
+        speed.y = (y + 200) / 12
 
 
 def inside(xy):
@@ -42,7 +45,7 @@ def draw():
 
     if inside(ball):
         goto(ball.x, ball.y)
-        dot(6, 'red')
+        dot(8, 'red')
 
     update()
 
@@ -54,11 +57,13 @@ def move():
         target = vector(200, y)
         targets.append(target)
 
+    """Blancos se desplazan más rápido hacia la izquierda"""
     for target in targets:
-        target.x -= 0.5
+        target.x -= 2
 
     if inside(ball):
-        speed.y -= 0.35
+        """Gravedad aumentada para caída más rápida"""
+        speed.y -= 0.6
         ball.move(speed)
 
     dupe = targets.copy()
@@ -74,7 +79,8 @@ def move():
         if not inside(target):
             return
 
-    ontimer(move, 50)
+    """Intervalo de actualización reducido para mayor velocidad/fluidez"""
+    ontimer(move, 25)
 
 
 setup(420, 420, 370, 0)
@@ -84,4 +90,3 @@ tracer(False)
 onscreenclick(tap)
 move()
 done()
-

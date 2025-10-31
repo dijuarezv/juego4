@@ -65,6 +65,12 @@ def move():
         """Gravedad aumentada para caída más rápida"""
         speed.y -= 0.6
         ball.move(speed)
+    else:
+        ball.x = -200
+        ball.y = -200
+       	speed.x = 0
+        speed.y = 0
+
 
     dupe = targets.copy()
     targets.clear()
@@ -74,8 +80,6 @@ def move():
             targets.append(target)
 
     draw()
-
-    # Si un objetivo sale de la pantalla, reaparece en el borde derecho con nueva altura
 
     for target in targets:
         if not inside(target):

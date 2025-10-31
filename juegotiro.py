@@ -65,6 +65,12 @@ def move():
         """Gravedad aumentada para caída más rápida"""
         speed.y -= 0.6
         ball.move(speed)
+    else:
+        ball.x = -200
+        ball.y = -200
+       	speed.x = 0
+        speed.y = 0
+
 
     dupe = targets.copy()
     targets.clear()
@@ -77,7 +83,8 @@ def move():
 
     for target in targets:
         if not inside(target):
-            return
+           target.x = 200
+           target.y = randrange(-150, 150)
 
     """Intervalo de actualización reducido para mayor velocidad/fluidez"""
     ontimer(move, 25)
